@@ -29,6 +29,7 @@ public class BoardUtils {
 		return column;
 	}
 	
+	//Creates an array of booleans where the values are true for the row you want to initialize
 	private static boolean[] initRow(int tileID) {
 		
 		final boolean[] row = new boolean[NUM_TILES];
