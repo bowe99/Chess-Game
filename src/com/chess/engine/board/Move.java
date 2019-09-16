@@ -33,4 +33,8 @@ public class Move {
 		}
 		
 	}
+
+	public int getDestinationCoordinate() {
+		return this.destinationCoordinate;
+	}
 }
