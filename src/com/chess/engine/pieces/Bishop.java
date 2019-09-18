@@ -77,4 +77,10 @@ public class Bishop extends Piece {
 		return BoardUtils.EIGHTH_COLUMN[currentPosition] && ((candidateOffsetVector == -7) || (candidateOffsetVector == 9));
 	}
 
+
+	@Override
+	public Bishop movePiece(Move move) {
+		return new Bishop( move.getDestinationCoordinate(), move.getMovedPiece().getPieceAlliance());
+	}
+
 }
