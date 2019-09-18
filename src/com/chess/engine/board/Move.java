@@ -28,7 +28,7 @@ public abstract class Move {
 			
 			final Builder builder = new Builder();
 			for(final Piece piece : this.board.currentPlayer().getActivePieces()) {
-				//TO-DO hashcode and equals for pieces
+				//TODO hashcode and equals for pieces
 				if(!this.movedPiece.equals(piece)) {
 					builder.setPiece(piece);
 				}
@@ -38,8 +38,7 @@ public abstract class Move {
 				builder.setPiece(piece);
 			}
 			
-			//move the moved piece
-			builder.setMoveMaker(null);
+			builder.setPiece(this.movedPiece.movePiece(this));
 			builder.setMoveMaker(this.board.currentPlayer().getOpponent().getAlliance());
 			return builder.build();
 
@@ -67,4 +66,8 @@ public abstract class Move {
 	}
 
 	public abstract Board execute();
+	
+	public Piece getMovedPiece() {
+		return this.movedPiece;
+	}
 }

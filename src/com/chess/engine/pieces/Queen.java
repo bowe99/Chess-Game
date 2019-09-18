@@ -75,5 +75,8 @@ public class Queen extends Piece{
 		return BoardUtils.EIGHTH_COLUMN[currentPosition] && ((candidateOffsetVector == 1) || (candidateOffsetVector == -7) || (candidateOffsetVector == 9));
 	}
 	
+	public Queen movePiece(Move move) {
+		return new Queen( move.getDestinationCoordinate(), move.getMovedPiece().getPieceAlliance());
+	}
 
 }

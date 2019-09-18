@@ -18,7 +18,7 @@ public abstract class Piece {
 		  final PieceType pieceType){
 		this.piecePosition = piecePosition;
 		this.pieceAlliance = pieceAlliance;
-		//TO-DO more work
+		//TODO more work
 		this.isFirstMove = false;
 		this.pieceType = pieceType;
 	}
@@ -39,6 +39,8 @@ public abstract class Piece {
 	}
 	
 	public abstract Collection<Move> calculateLegalMoves(final Board board);
+	
+	public abstract Piece movePiece(Move move);
 	
 	public enum PieceType{
 		
