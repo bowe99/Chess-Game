@@ -50,6 +50,8 @@ public class WhitePlayer extends Player{
 					if(Player.calculateAttacksOnTile(61, opponentLegals).isEmpty() &&
 					   Player.calculateAttacksOnTile(62, opponentLegals).isEmpty() &&
 					   rookTile.getPiece().getPieceType().isRook()) {
+						
+						//TODO implement castle move
 						kingCastles.add(null);
 					}
 				}
@@ -65,9 +67,9 @@ public class WhitePlayer extends Player{
 					
 					if(Player.calculateAttacksOnTile(57, opponentLegals).isEmpty() &&
 					   Player.calculateAttacksOnTile(58, opponentLegals).isEmpty() &&
-					   Player.calculateAttacksOnTile(59, opponentLegals).isEmpty() &&
 					   rookTile.getPiece().getPieceType().isRook()) {
-								
+						
+						//TODO implement castle move	
 						kingCastles.add(null);
 					}
 				}
