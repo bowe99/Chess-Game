@@ -30,11 +30,11 @@ public abstract class Player {
 														opponentMoves).isEmpty();
 	}
 
-	private King getPlayerKing() {
+	public King getPlayerKing() {
 		return this.playerKing;
 	}
 	
-	private Collection<Move> getLegalMoves(){
+	public Collection<Move> getLegalMoves(){
 		return this.legalMoves;
 	}
 	
