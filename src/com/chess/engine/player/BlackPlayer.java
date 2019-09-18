@@ -9,6 +9,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.chess.engine.pieces.Piece;
+import com.chess.engine.pieces.Rook;
 import com.google.common.collect.ImmutableList;
 
 public class BlackPlayer extends Player{
@@ -35,7 +36,8 @@ public class BlackPlayer extends Player{
 	}
 
 	@Override
-	public Collection<Move> calculateKingCastles(Collection<Move> playerLegals, Collection<Move> opponentLegals) {
+	protected Collection<Move> calculateKingCastles(final Collection<Move> playerLegals, 
+													final Collection<Move> opponentLegals) {
 		
 		final List<Move> kingCastles = new ArrayList<>();
 		
@@ -52,7 +54,12 @@ public class BlackPlayer extends Player{
 					   rookTile.getPiece().getPieceType().isRook()) {
 						
 						//TODO implement castle move
-						kingCastles.add(null);
+						kingCastles.add(new Move.KingSideCastleMove(this.board, 
+																	this.playerKing, 
+																	6, 			//Destination King Position
+																	(Rook)rookTile.getPiece(), 
+																	rookTile.getTileCoordinate(), 
+																	5));
 					}
 				}
 			}
@@ -71,7 +78,12 @@ public class BlackPlayer extends Player{
 					   rookTile.getPiece().getPieceType().isRook()) {
 						
 						//TODO implement castle move	
-						kingCastles.add(null);
+						kingCastles.add(new Move.KingSideCastleMove(this.board, 
+																	this.playerKing, 
+																	2, 			//Destination King Position
+																	(Rook)rookTile.getPiece(), 
+																	rookTile.getTileCoordinate(), 
+																	3));
 					}
 				}
 			}

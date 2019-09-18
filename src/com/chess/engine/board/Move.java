@@ -192,7 +192,7 @@ public abstract class Move {
 		}
 	}
 	
-	static abstract class CastleMove extends Move{
+		public static class CastleMove extends Move{
 		
 		protected final Rook castleRook;
 		protected final int castleRookStart;
@@ -250,10 +250,10 @@ public abstract class Move {
 		public KingSideCastleMove(final Board board,
 						    	  final Piece movedPiece,
 						    	  final int destinationCoordinate,
-						    	  final Rook castleRook,
+						    	  final Rook rook,
 								  final int castleRookStart,
 								  final int castleRookDestination) {
-			super(board, movedPiece, destinationCoordinate, castleRook, castleRookStart, castleRookDestination);
+			super(board, movedPiece, destinationCoordinate, rook, castleRookStart, castleRookDestination);
 		}
 		
 		@Override

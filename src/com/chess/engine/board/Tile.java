@@ -47,6 +47,10 @@ public abstract class Tile {	//Abstract because I don't want to be able to insta
 	 */
 	public abstract Piece getPiece();
 	
+	public int getTileCoordinate() {
+		return this.tileCoordinate;
+	}
+	
 	/**
 	 * Class for the empty tiles
 	 * @author Kevin
