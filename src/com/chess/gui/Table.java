@@ -29,6 +29,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
+import com.chess.engine.board.Move.MoveFactory;
 import com.chess.engine.pieces.Piece;
 import com.chess.engine.player.MoveTransition;
 
@@ -36,7 +37,7 @@ public class Table {
 	
 	private final JFrame gameFrame;
 	private final BoardPanel boardPanel;
-	public final Board chessBoard;
+	public Board chessBoard;
 	
 	private Tile sourceTile;
 	private Tile destinationTile;
@@ -124,6 +125,16 @@ public class Table {
 			setPreferredSize(BOARD_PANEL_DIMENSION);
 			validate();
 		}
+
+		public void drawBoard(final Board chessBoardToDraw) {
+			removeAll();
+			for(final TilePanel tilePanel : boardTiles) {
+				tilePanel.drawTile(chessBoardToDraw);
+				add(tilePanel);
+			}
+			validate();
+			repaint();
+		}
 		
 	}
 	
@@ -137,6 +148,7 @@ public class Table {
 			this.tileID = tileID;
 			setPreferredSize(TILE_PANEL_DIMENSION);
 			assignTilePieceIcon(chessBoard);
+			assignTileColor();
 			
 			addMouseListener(new MouseListener(){
 
@@ -166,12 +178,26 @@ public class Table {
 							//second click
 							destinationTile = chessBoard.getTile(tileID);
 							//TODO fill in under
-							final Move move = null;
+							final Move move = MoveFactory.createMove(chessBoard, sourceTile.getTileCoordinate(), destinationTile.getTileCoordinate());
 							final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
 							if(transition.getMoveStatus().isDone()) {
-								//chessBoard = chessBoard.currentPlayer().makeMove(move);
+								chessBoard = transition.getBoard();
+								//TODO add the move to the move log
 							}
+							sourceTile = null;
+							destinationTile = null;
+							humanMovedPiece = null;
+							
 						}
+						
+						SwingUtilities.invokeLater(new Runnable() {
+
+							@Override
+							public void run() {
+								boardPanel.drawBoard(chessBoard);
+							}
+							
+						});
 					}
 				}
 
@@ -202,8 +228,15 @@ public class Table {
 			});
 			
 			
-			assignTileColor();
+			
 			validate();
+		}
+
+		public void drawTile(final Board board) {
+			assignTileColor();
+			assignTilePieceIcon(board);
+			validate();
+			repaint();
 		}
 
 		private void assignTileColor() {
