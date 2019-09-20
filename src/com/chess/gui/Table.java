@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,15 +23,24 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
+import com.chess.engine.board.Move;
+import com.chess.engine.board.Tile;
+import com.chess.engine.pieces.Piece;
+import com.chess.engine.player.MoveTransition;
 
 public class Table {
 	
 	private final JFrame gameFrame;
 	private final BoardPanel boardPanel;
 	public final Board chessBoard;
+	
+	private Tile sourceTile;
+	private Tile destinationTile;
+	private Piece humanMovedPiece;
 	
 	private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
 	private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
@@ -126,6 +137,71 @@ public class Table {
 			this.tileID = tileID;
 			setPreferredSize(TILE_PANEL_DIMENSION);
 			assignTilePieceIcon(chessBoard);
+			
+			addMouseListener(new MouseListener(){
+
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					
+					if(SwingUtilities.isRightMouseButton(arg0)) {
+						
+						sourceTile = null;
+						destinationTile = null;
+						humanMovedPiece = null;
+						
+						
+					}
+					else if (SwingUtilities.isLeftMouseButton(arg0)) {
+						
+						if(sourceTile == null) {
+							//first click
+							sourceTile = chessBoard.getTile(tileID);
+							humanMovedPiece = sourceTile.getPiece();
+							if(humanMovedPiece == null) {
+								sourceTile = null;
+							}
+							
+						}
+						else {
+							//second click
+							destinationTile = chessBoard.getTile(tileID);
+							//TODO fill in under
+							final Move move = null;
+							final MoveTransition transition = chessBoard.currentPlayer().makeMove(move);
+							if(transition.getMoveStatus().isDone()) {
+								//chessBoard = chessBoard.currentPlayer().makeMove(move);
+							}
+						}
+					}
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
+			
+			
 			assignTileColor();
 			validate();
 		}
@@ -148,7 +224,6 @@ public class Table {
 		private void assignTilePieceIcon(final Board board) {
 			this.removeAll();
 			if(board.getTile(this.tileID).isTileOccupied()) {
-				String pieceIconPath = "";
 				try {
 					final BufferedImage image = 
 							ImageIO.read(new File(defaultPieceImagesPath + 
