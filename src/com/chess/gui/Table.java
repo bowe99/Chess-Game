@@ -29,10 +29,12 @@ public class Table {
 	
 	private final JFrame gameFrame;
 	private final BoardPanel boardPanel;
+	public final Board chessBoard;
 	
 	private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
 	private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
 	private static final Dimension TILE_PANEL_DIMENSION = new Dimension(10, 10);
+	private static String defaultPieceImagesPath = "art/simple/";
 	
 	private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
@@ -43,6 +45,8 @@ public class Table {
 		JMenuBar tableMenuBar = createTableMenuBar();
 		this.gameFrame.setJMenuBar(tableMenuBar);
 		this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
+		
+		this.chessBoard = Board.createStandardBoard();
 		
 		this.boardPanel = new BoardPanel();
 		this.gameFrame.add(this.boardPanel, BorderLayout.CENTER);
@@ -121,6 +125,7 @@ public class Table {
 			super(new GridBagLayout());
 			this.tileID = tileID;
 			setPreferredSize(TILE_PANEL_DIMENSION);
+			assignTilePieceIcon(chessBoard);
 			assignTileColor();
 			validate();
 		}
@@ -146,7 +151,7 @@ public class Table {
 				String pieceIconPath = "";
 				try {
 					final BufferedImage image = 
-							ImageIO.read(new File(pieceIconPath + 
+							ImageIO.read(new File(defaultPieceImagesPath + 
 									board.getTile(this.tileID).getPiece().getPieceAlliance().toString().substring(0,1) + 
 									board.getTile(this.tileID).getPiece().toString() +
 									".gif"));
