@@ -31,12 +31,13 @@ public class Queen extends Piece{
 				
 			
 			while(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) { //Checking for valid tile because if tile is occupied then there is no point to continue looking 
-				candidateDestinationCoordinate += candidateCoordinateOffset;
 				
-				if(isFirstColumnExclusion(this.piecePosition, candidateCoordinateOffset) ||
-						isEighthColumnExclusion(this.piecePosition, candidateCoordinateOffset)) {
+				if(isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
+						isEighthColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
 					break;
 				}
+				
+				candidateDestinationCoordinate += candidateCoordinateOffset;
 				
 				if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
 					final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
