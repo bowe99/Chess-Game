@@ -9,6 +9,7 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
+import com.chess.engine.pieces.Piece.PieceType;
 import com.google.common.collect.ImmutableList;
 
 public class Queen extends Piece{
@@ -16,9 +17,15 @@ public class Queen extends Piece{
 	private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
 	public Queen(final int piecePosition, final Alliance pieceAlliance) {
-		super(piecePosition, pieceAlliance, PieceType.QUEEN);
+		super(piecePosition, pieceAlliance, PieceType.QUEEN, true);
 		
 	}
+	
+	public Queen(final int piecePosition, final Alliance pieceAlliance, final boolean isFirstMove) {
+		super(piecePosition, pieceAlliance, PieceType.QUEEN, isFirstMove);
+		
+	}
+
 
 	@Override
 	public Collection<Move> calculateLegalMoves(Board board) {

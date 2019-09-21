@@ -3,8 +3,10 @@ package com.chess.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -360,7 +362,7 @@ public class Table {
 									board.getTile(this.tileID).getPiece().getPieceAlliance().toString().substring(0,1) + 
 									board.getTile(this.tileID).getPiece().toString() +
 									".gif"));
-					add(new JLabel(new ImageIcon(image)));
+					add(new JLabel(new ImageIcon(Table.resize(image, 60, 60))));
 					
 				}catch(IOException e) {
 					e.printStackTrace();
@@ -373,7 +375,16 @@ public class Table {
 	
 	
 	
-	
+	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
+	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+	    Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(tmp, 0, 0, null);
+	    g2d.dispose();
+
+	    return dimg;
+	}  
 	
 	
 	
