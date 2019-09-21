@@ -46,10 +46,11 @@ public class Table {
 	private Tile destinationTile;
 	private Piece humanMovedPiece;
 	private BoardDirection boardDirection;
+	private boolean visibleLegals;
 	
-	private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(600, 600);
-	private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(400, 350);
-	private static final Dimension TILE_PANEL_DIMENSION = new Dimension(10, 10);
+	private static final Dimension OUTER_FRAME_DIMENSION = new Dimension(1200, 1200);
+	private static final Dimension BOARD_PANEL_DIMENSION = new Dimension(800, 700);
+	private static final Dimension TILE_PANEL_DIMENSION = new Dimension(20, 20);
 	private static String defaultPieceImagesPath = "art/simple/";
 	
 	private final Color lightTileColor = Color.decode("#FFFACD");
@@ -61,6 +62,7 @@ public class Table {
 		JMenuBar tableMenuBar = createTableMenuBar();
 		this.gameFrame.setJMenuBar(tableMenuBar);
 		this.gameFrame.setSize(OUTER_FRAME_DIMENSION);
+		this.visibleLegals = true;
 		
 		this.chessBoard = Board.createStandardBoard();
 		
@@ -127,6 +129,25 @@ public class Table {
 			
 		});
 		preferenceMenu.add(flipBoardMenuItem);
+		
+		preferenceMenu.addSeparator();
+		
+		final JMenuItem visibleLegalMoves = new JMenuItem("Enable/Disable Visible Legal Moves");
+		visibleLegalMoves.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(visibleLegals) {
+					visibleLegals = false;
+				}
+				else {
+					visibleLegals = true;
+				}
+			}
+			
+		});
+		preferenceMenu.add(visibleLegalMoves);
+		
 		return preferenceMenu;
 	}
 	
@@ -295,7 +316,7 @@ public class Table {
 		
 		
 		private void highlightLegals(final Board board) {
-			if(true) {
+			if(visibleLegals) {
 				for(final Move move : pieceLegalMoves(board)) {
 					if(move.getDestinationCoordinate() == this.tileID) {
 						try {
