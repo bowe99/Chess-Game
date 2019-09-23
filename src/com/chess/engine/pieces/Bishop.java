@@ -16,7 +16,12 @@ public class Bishop extends Piece {
 	private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9, -7, 7, 9};
 	
 	public Bishop(final int piecePosition, final Alliance pieceAlliance) {
-		super(piecePosition, pieceAlliance, PieceType.BISHOP);
+		super(piecePosition, pieceAlliance, PieceType.BISHOP, true);
+		
+	}
+	
+	public Bishop(final int piecePosition, final Alliance pieceAlliance, final boolean isFirstMove) {
+		super(piecePosition, pieceAlliance, PieceType.BISHOP, isFirstMove);
 		
 	}
 
@@ -27,18 +32,22 @@ public class Bishop extends Piece {
 		final List<Move> legalMoves = new ArrayList<>();
 		
 		for(final int candidateCoordinateOffset : CANDIDATE_MOVE_VECTOR_COORDINATES) {
+			
+			
 			int candidateDestinationCoordinate = this.piecePosition;
 			
 			
 				
 			
 			while(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) { //Checking for valid tile because if tile is occupied then there is no point to continue looking 
-				candidateDestinationCoordinate += candidateCoordinateOffset;
 				
-				if(isFirstColumnExclusion(this.piecePosition, candidateCoordinateOffset) ||
-						isEighthColumnExclusion(this.piecePosition, candidateCoordinateOffset)) {
+				
+				if(isFirstColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset) ||
+						isEighthColumnExclusion(candidateDestinationCoordinate, candidateCoordinateOffset)) {
 					break;
 				}
+				
+				candidateDestinationCoordinate += candidateCoordinateOffset;
 				
 				if(BoardUtils.isValidTileCoordinate(candidateDestinationCoordinate)) {
 					final Tile candidateDestinationTile = board.getTile(candidateDestinationCoordinate);
