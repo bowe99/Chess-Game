@@ -51,8 +51,8 @@ public abstract class Move {
 		}
 		final Move otherMove = (Move) other;
 		
-		return this.getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
-			   this.getMovedPiece() == otherMove.getMovedPiece() &&
+		return getDestinationCoordinate() == otherMove.getDestinationCoordinate() &&
+			   getMovedPiece() == otherMove.getMovedPiece() &&
 			   getCurrentCoordinate() == otherMove.getCurrentCoordinate();
 	}
 	
@@ -107,6 +107,7 @@ public abstract class Move {
 		public String toString() {
 			return movedPiece.getPieceType().toString() + BoardUtils.getPositionAtCoordinate(this.destinationCoordinate);
 		}
+		
 	}
 	
 	public static class AttackMove extends Move{
