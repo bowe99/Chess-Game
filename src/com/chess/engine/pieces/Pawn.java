@@ -57,6 +57,14 @@ public class Pawn extends Piece{
 					
 					
 				}
+				else if(board.getEnPassantPawn() != null) {
+					if(board.getEnPassantPawn().getPiecePosition() == (this.piecePosition + (this.pieceAlliance.getOppositeDirection()))){
+						final Piece pieceOnCandidate = board.getEnPassantPawn();
+						if(this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+							legalMoves.add(new Move.PawnEnPassantAttackMove(board, this, currentCandidateDestination, pieceOnCandidate));
+						}
+					}
+				}
 				
 			
 			}
@@ -71,6 +79,14 @@ public class Pawn extends Piece{
 						legalMoves.add(new Move.PawnAttackMove(board, this, currentCandidateDestination, pieceOnCandidate));
 					}
 					
+				}
+				else if(board.getEnPassantPawn() != null) {
+					if(board.getEnPassantPawn().getPiecePosition() == (this.piecePosition - (this.pieceAlliance.getOppositeDirection()))){
+						final Piece pieceOnCandidate = board.getEnPassantPawn();
+						if(this.pieceAlliance != pieceOnCandidate.getPieceAlliance()) {
+							legalMoves.add(new Move.PawnEnPassantAttackMove(board, this, currentCandidateDestination, pieceOnCandidate));
+						}
+					}
 				}
 				
 			}
