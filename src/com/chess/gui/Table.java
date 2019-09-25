@@ -3,6 +3,7 @@ package com.chess.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -28,6 +29,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
@@ -58,10 +60,15 @@ public class Table {
 	private static final Dimension TILE_PANEL_DIMENSION = new Dimension(20, 20);
 	private static String defaultPieceImagesPath = "art/simple/";
 	
+	private static Font defaultFont = new Font("sans-serif", Font.PLAIN, 24);
+	
 	private final Color lightTileColor = Color.decode("#FFFACD");
     private final Color darkTileColor = Color.decode("#593E1A");
 	
 	public Table() {
+		UIManager.put("Menu.font", defaultFont);
+		UIManager.put("MenuItem.font", defaultFont);
+		
 		this.gameFrame = new JFrame("JChess");
 		this.gameFrame.setLayout(new BorderLayout());
 		JMenuBar tableMenuBar = createTableMenuBar();
