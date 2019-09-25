@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class TakenPiecesPanel extends JPanel {
 	
 	private static final EtchedBorder PANEL_BORDER = new EtchedBorder(EtchedBorder.RAISED);
 	private static final Color PANEL_COLOR = Color.decode("0xFDFE6");
-	private static final Dimension TAKEN_PIECES_DIMENSION = new Dimension(80, 160);
+	private static final Dimension TAKEN_PIECES_DIMENSION = new Dimension(120, 240);
 	
 	
 	public TakenPiecesPanel() {
@@ -96,10 +97,11 @@ public class TakenPiecesPanel extends JPanel {
 				
 				final BufferedImage image = ImageIO.read(new File("art/simple/" + 
 																  takenPiece.getPieceAlliance().toString().substring(0, 1) +
-																  takenPiece.toString()));
+																  takenPiece.toString() +
+																  ".gif"));
 				final ImageIcon icon = new ImageIcon(image);
-				//TODO finish constructor of JLabel
-				final JLabel imageLabel = new JLabel();
+				final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(
+                        icon.getIconWidth() - 15, icon.getIconWidth() - 15, Image.SCALE_SMOOTH)));
 				this.southPanel.add(imageLabel);
 				
 			}catch(final IOException e){
@@ -112,10 +114,11 @@ public class TakenPiecesPanel extends JPanel {
 				
 				final BufferedImage image = ImageIO.read(new File("art/simple/" + 
 																  takenPiece.getPieceAlliance().toString().substring(0, 1) +
-																  takenPiece.toString()));
+																  takenPiece.toString() +
+																  ".gif"));
 				final ImageIcon icon = new ImageIcon(image);
-				//TODO finish constructor of JLabel
-				final JLabel imageLabel = new JLabel();
+				final JLabel imageLabel = new JLabel(new ImageIcon(icon.getImage().getScaledInstance(
+                        icon.getIconWidth(), icon.getIconWidth(), Image.SCALE_SMOOTH)));
 				this.northPanel.add(imageLabel);
 				
 			}catch(final IOException e){

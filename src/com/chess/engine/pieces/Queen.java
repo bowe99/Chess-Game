@@ -9,7 +9,6 @@ import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
-import com.chess.engine.pieces.Piece.PieceType;
 import com.google.common.collect.ImmutableList;
 
 public class Queen extends Piece{
@@ -57,7 +56,7 @@ public class Queen extends Piece{
 						final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 						
 						if(this.pieceAlliance != pieceAlliance) {
-							legalMoves.add(new Move.AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
+							legalMoves.add(new Move.MajorAttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
 						}
 						break;
 					}
