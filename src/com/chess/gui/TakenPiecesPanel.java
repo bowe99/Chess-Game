@@ -30,7 +30,7 @@ public class TakenPiecesPanel extends JPanel {
 	private final JPanel southPanel;
 	
 	private static final EtchedBorder PANEL_BORDER = new EtchedBorder(EtchedBorder.RAISED);
-	private static final Color PANEL_COLOR = Color.decode("0xFDFE6");
+	private static final Color PANEL_COLOR = Color.decode("0xfff3d1");
 	private static final Dimension TAKEN_PIECES_DIMENSION = new Dimension(120, 240);
 	
 	

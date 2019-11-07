@@ -1,6 +1,7 @@
 package com.chess.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class GameHistoryPanel extends JPanel{
 		table.setRowHeight(15);
 		this.scrollPane = new JScrollPane(table);
 		scrollPane.setPreferredSize(HISTORY_PANEL_DIMENSION);
+		
 		
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.setVisible(true);
